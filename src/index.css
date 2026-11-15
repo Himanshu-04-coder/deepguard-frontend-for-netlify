@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-paper: 253 251 247;
+  --color-card: 255 255 255;
+  --color-pencil: 45 45 45;
+  --color-shadow: 45 45 45;
+  --color-ink: 45 93 161;
+  --color-marker: 220 67 67;
+  --color-surface-50: 248 250 252;
+  --color-surface-100: 241 245 249;
+  --color-surface-200: 226 232 240;
+  --color-surface-300: 203 213 225;
+  --color-surface-400: 148 163 184;
+  --color-surface-500: 100 116 139;
+  --color-surface-600: 71 85 105;
+  --color-surface-700: 51 65 85;
+  --color-surface-800: 30 41 59;
+  --color-surface-900: 15 23 42;
+  --color-brand-50: 239 246 255;
+  --color-brand-200: 191 219 254;
+  --color-brand-300: 147 197 253;
+  --color-brand-600: 37 99 235;
+  --color-brand-700: 29 78 216;
+  --color-brand-900: 30 58 138;
+  --wobble-1: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --wobble-2: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  --wobble-3: 225px 15px 255px 15px / 15px 255px 15px 225px;
+  --wobble-4: 15px 255px 15px 225px / 225px 15px 255px 15px;
+}
+
+.dark {
+  --color-paper: 23 26 31;
+  --color-card: 31 36 43;
+  --color-pencil: 226 232 240;
+  --color-shadow: 8 11 15;
+  --color-ink: 96 165 250;
+  --color-marker: 248 113 113;
+  --color-surface-50: 248 250 252;
+  --color-surface-100: 51 65 85;
+  --color-surface-200: 71 85 105;
+  --color-surface-300: 100 116 139;
+  --color-surface-400: 148 163 184;
+  --color-surface-500: 148 163 184;
+  --color-surface-600: 203 213 225;
+  --color-surface-700: 51 65 85;
+  --color-surface-800: 31 36 43;
+  --color-surface-900: 23 26 31;
+  --color-brand-50: 30 58 138;
+  --color-brand-200: 96 165 250;
+  --color-brand-300: 147 197 253;
+  --color-brand-600: 96 165 250;
+  --color-brand-700: 147 197 253;
+  --color-brand-900: 30 58 138;
+}
+
+/* --- Base ---------------------------------------------------------------- */
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-paper text-pencil antialiased;
+  font-family: cursive;
+  background-image: radial-gradient(rgb(var(--color-surface-200) / 0.65) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-pencil/20 rounded-full;
+}
+
+.dark .bg-white {
+  background-color: rgb(var(--color-card) / 1);
+}
+
+/* --- Component helpers --------------------------------------------------- */
+
+@layer components {
+  .card {
+    @apply bg-white border-2 border-pencil shadow-hard;
+    border-radius: var(--wobble-1);
+  }
+
+  .card-padded {
+    @apply card p-6;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2
+           text-sm font-medium transition focus:outline-none;
+    border-radius: var(--wobble-2);
+    @apply border-2 border-pencil shadow-hard;
+  }
+
+  .btn-primary {
+    @apply btn bg-white text-pencil hover:bg-marker hover:text-white;
+    transition: all 100ms ease-in-out;
+  }
+  .btn-primary:hover {
+    box-shadow: 2px 2px 0 rgb(var(--color-shadow) / 1);
+    @apply translate-x-[2px] translate-y-[2px];
+  }
+  .btn-primary:active {
+    @apply shadow-none translate-x-[4px] translate-y-[4px];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-pencil hover:bg-paper/50;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 border-2 border-pencil bg-white
+           text-pencil focus:outline-none;
+    border-radius: var(--wobble-3);
+  }
+  .input:focus {
+    @apply shadow-hard ring-2 ring-ink/20;
+  }
+
+  .table-base {
+    @apply w-full text-left text-sm;
+  }
+  .table-base thead th {
+    @apply px-4 py-3 font-semibold text-xs uppercase tracking-wider
+           text-pencil/60 bg-paper/50 border-b-2 border-pencil;
+  }
+  .table-base tbody td {
+    @apply px-4 py-3 border-b border-pencil/20;
+  }
+  .table-base tbody tr:hover {
+    @apply bg-paper/50;
+  }
+
+  /* Wobbly Utils */
+  .wobbly-1 { border-radius: var(--wobble-1); }
+  .wobbly-2 { border-radius: var(--wobble-2); }
+  .wobbly-3 { border-radius: var(--wobble-3); }
+  .wobbly-4 { border-radius: var(--wobble-4); }
+}
